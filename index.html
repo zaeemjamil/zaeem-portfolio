@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Muhammad Zaeem Jamil — Data Analyst | ML Engineer</title>
+<meta name="description" content="Portfolio of Muhammad Zaeem Jamil, a Data Analyst working with Python, statistics, Excel, MySQL and machine learning. BS Statistics at the University of the Punjab.">
+<meta property="og:title" content="Muhammad Zaeem Jamil — Data Analyst | ML Engineer">
+<meta property="og:description" content="Data analysis, statistics and machine learning projects by Zaeem Jamil.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Ctext x='15' y='23' font-size='22' font-family='Arial' font-weight='900' text-anchor='middle' fill='%23fff'%3Ez%3C/text%3E%3Ccircle cx='24' cy='23' r='3' fill='%23ff2a2a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="pre" aria-hidden="true"><b>zaeem<i class="dot">.</i></b></div>
+<header class="nav" id="nav"><div class="wrap">
+  <a class="brand" href="#home" aria-label="zaeem. — home">zaeem<i class="dot">.</i></a>
+  <nav class="nl" id="nl" aria-label="Primary"></nav>
+  <a class="pill sm xs" href="#" data-resume download>Resume <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a>
+  <button class="bur" id="bur" aria-label="Open menu" aria-expanded="false" aria-controls="mm"><svg id="bi" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+<nav class="mm" id="mm" aria-label="Mobile"></nav>
+<main id="main"></main>
+<footer class="foot" id="foot"></footer>
+<button id="fab" aria-label="Ask the portfolio assistant" aria-expanded="false" aria-controls="chatPanel" type="button"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></button>
+<div class="frame" id="chatPanel" role="dialog" aria-label="ZJ Assistant chat">
+ <div class="fin"><div class="ch"><div class="av" aria-hidden="true">ZJ</div><div>ZJ Assistant<small>Answers only about Zaeem Jamil</small></div><button class="cx" id="cx" aria-label="Close chat" type="button">&times;</button></div>
+  <div id="msgs" role="log" aria-live="polite" aria-label="Chat messages" tabindex="0"></div><div id="sug"></div>
+  <form id="cf"><input id="ci" placeholder="Ask about Zaeem…" aria-label="Your question" maxlength="300" autocomplete="off"><button class="pill r sm" type="submit">Send</button></form></div>
+</div>
+<dialog id="dlg" aria-label="Project details"></dialog>
+
+<script type="module">
+import {LINKS as L, PROFILE as P, PROJECTS} from "./data.js";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const arrow='<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>';
+const dlIcon='<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>';
+const rm=matchMedia("(prefers-reduced-motion:reduce)").matches, ext='target="_blank" rel="noopener noreferrer"';
+const pad=n=>String(n).padStart(2,"0");
+const NAV=[["home","Home"],["about","About"],["process","Process"],["projects","Projects"],["experience","Experience"],["contact","Contact"]];
+const CONNECT=[["Email",L.email,`mailto:${L.email}`],["GitHub","zaeemjamil",L.github],["LinkedIn","muhammadzaeemjamil",L.linkedin],["Fiverr","zaeemjamil",L.fiverr]];
+const nl=NAV.map(([i,l])=>`<a href="#${i}">${l}</a>`).join("");
+$("#nl").innerHTML=nl; $("#mm").innerHTML=nl+`<a class="pill" href="#" data-resume download>Resume ${dlIcon}</a>`;
+
+/* ---------- sections (all content comes from data.js) ---------- */
+const thumb=p=>p.image?`<img src="${p.image}" alt="${p.imageAlt||p.title}" loading="lazy">`:`<div class="art" role="img" aria-label="Workflow overview for ${p.title}. Not a screenshot.">${p.placeholder.map(s=>`<span>${s}</span>`).join("")}<i>Workflow overview — not a screenshot</i></div>`;
+const card=(p,i)=>`<article class="pc rv" data-reveal="zoom"><div class="pshell"><i class="hole"></i><div class="pin">
+ <button class="ban" data-open="${p.slug}" aria-label="Open details: ${p.title}">${thumb(p)}</button>
+ <div class="pb"><span class="pn">${pad(i+1)} · ${p.categories.slice(0,3).join(" · ")}</span><h3>${p.title}</h3>
+ <div class="row">${p.githubUrl?`<a class="pill sm w" href="${p.githubUrl}" ${ext}>View on GitHub ${arrow}</a>`:""}${p.liveUrl?`<a class="pill sm r" href="${p.liveUrl}" ${ext}>Live Demo ${arrow}</a>`:""}${p.caseStudyUrl?`<a class="pill sm" href="${p.caseStudyUrl}" ${ext}>Case Study ${arrow}</a>`:""}<button class="pill sm" data-open="${p.slug}">Details</button></div></div></div></div></article>`;
+const ledger=[...P.experience,{mark:"PU",role:P.education.degree,org:P.education.school,place:"Gujranwala",period:`${P.education.years}`,summary:"Studying statistics alongside project-based data analysis work.",status:"In progress"}];
+const check=`<svg class="chk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>`;
+const row=(e,i)=>`<div class="lr rv"><span class="idx">${pad(i+1)}</span><span class="mark" aria-hidden="true">${e.mark}</span><div><h3>${e.role} — ${e.org}</h3><p>${e.summary}</p></div><div class="lm">${e.period}<small>${e.status||e.place||""}</small></div>${check}</div>`;
+
+$("#main").innerHTML=`
+<section class="hero" id="home"><canvas id="hc" aria-hidden="true"></canvas><div class="wrap">
+ <p class="hi rv">Hi, I'm</p><h1 class="rv">${P.name}</h1>
+ <p class="role rv">Data Analyst <span class="sep">|</span> <span class="stroke">ML Engineer</span></p>
+ <p class="lead rv">${P.intro}</p>
+ <div class="cta rv"><a class="pill r" href="#projects">View My Work</a><a class="pill" href="#contact">Contact Me</a><a class="pill w" href="#" data-resume download>Resume</a></div>
+</div><a class="scroll" href="#about" aria-label="Scroll to About"></a></section>
+
+<section class="about" id="about"><div class="wrap">
+ <div class="bcol rv" data-reveal="left"><div class="lan" aria-hidden="true"></div><div class="clip" aria-hidden="true"></div>
+  <div class="badge"><div class="slot" aria-hidden="true"></div><div class="mono" role="img" aria-label="ZJ monogram">ZJ<i class="dot">.</i></div><h3>${P.shortName}</h3><p>${P.title}</p><div class="bt"><span>${P.education.degree}</span><span>Gujranwala</span></div></div></div>
+ <div class="rv" data-reveal="right"><div class="hello hand" style="font-weight:700;margin-bottom:6px">Hello!</div><h2>I'm ${P.shortName}.</h2>
+  ${P.about.map(t=>`<p>${t}</p>`).join("")}
+  <dl class="facts"><div><dt>Education</dt><dd>${P.education.degree}, ${P.education.school}</dd></div><div><dt>Years</dt><dd>${P.education.years} · ${P.education.note.toLowerCase()}</dd></div><div><dt>Languages</dt><dd>${P.languages.join(", ")}</dd></div></dl>
+  ${Object.entries(P.skills).map(([k,v])=>`<div class="grp"><h4>${k}</h4><ul class="chips">${v.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")}</div>
+</div>
+<svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path fill="#ffffff" fill-opacity=".35" d="M0 70C120 30 240 100 380 66S620 8 760 56s280 60 420 18 200-24 260-8v58H0z"/><path fill="#fff" d="M0 92c90-34 170 16 260-4s150-58 250-32 150 46 260 30 170-58 290-40 220 40 380 10v64H0z"/></svg></section>
+
+<section class="process" id="process"><div class="wrap">
+ <div class="hd rv"><p class="eyebrow k">Process</p><h2>How I work</h2><p>Four steps I follow on every project, from the first question to the final output.</p><span class="note hand" aria-hidden="true">one step at a time ↓</span></div>
+ <div class="stage" id="stage"><svg id="psvg" aria-hidden="true"><path id="pbase"/><path id="pfill"/></svg>
+  ${P.process.map((s,i)=>`<div class="tag rv" data-reveal="${i%2?"right":"left"}"><div class="tin"><i class="hole"></i><span class="n">${s.n}</span><h3>${s.t}</h3><p>${s.d}</p></div></div>`).join("")}
+  <span class="note end hand" aria-hidden="true">from question to insight.</span></div>
+</div></section>
+
+<section class="systems" id="projects"><div class="wrap">
+ <div class="hd rv"><p class="eyebrow">Projects</p><h2>Projects I've <span class="stroke">built</span></h2><p>Three real projects: automated statistical analysis, hypothesis testing, and an Excel sales analysis.</p></div>
+ <div class="pgrid">${PROJECTS.map(card).join("")}</div>
+ <a class="viewall" href="https://github.com/zaeemjamil?tab=repositories" ${ext}>View all Projects on GitHub ${arrow}</a>
+</div></section>
+
+<section class="led" id="experience"><div class="wrap">
+ <div class="hd rv"><p class="eyebrow">Background</p><h2>Experience &amp; <span class="stroke">education</span></h2><p>Internships and studies, newest first.</p></div>
+ <div class="rows">${ledger.map(row).join("")}</div>
+</div></section>
+
+<section class="ct" id="contact"><div class="bgw" aria-hidden="true">Contact</div><div class="wrap">
+ <div class="rv" data-reveal="left"><p class="eyebrow">Get In Touch</p><h2>Let's build something with <span class="stroke">data.</span></h2>
+  <p class="lead">Questions, projects or a conversation about data analysis and machine learning: email is the fastest way to reach me.</p>
+  <ul>${CONNECT.map(([k,v,h])=>`<li><a class="lk" href="${h}" ${h.startsWith("http")?ext:""}><span>${k} ${arrow}</span><span>${v}</span></a></li>`).join("")}</ul></div>
+ <form class="panel rv" data-reveal="right" id="mf" novalidate><h3>Send a message</h3>
+  <label for="mn">Your Name</label><input id="mn" required autocomplete="name" placeholder="Your name">
+  <label for="me">Your Email</label><input id="me" type="email" required autocomplete="email" placeholder="you@example.com">
+  <label for="mm2">Message</label><textarea id="mm2" required placeholder="How can I help?"></textarea>
+  <button type="submit">Send Message</button><p id="fs" role="status"></p></form>
+</div></section>`;
+
+$("#foot").innerHTML=`<div class="wrap"><div class="word">zaeem<i class="dot">.</i></div><div class="fc">
+ <div><h5>Navigate</h5>${NAV.map(([i,l])=>`<a href="#${i}">${l}</a>`).join("")}</div>
+ <div><h5>Connect</h5>${CONNECT.map(([k,v,h])=>`<a href="${h}" ${h.startsWith("http")?ext:""}>${k} ${arrow}</a>`).join("")}</div>
+ <div><h5>Based In</h5><p>${P.location}</p></div></div><p class="fb">© ${new Date().getFullYear()} ${P.name}. ${P.title}.</p></div>`;
+
+/* ---------- preloader ---------- */
+setTimeout(()=>$("#pre").classList.add("hide"),rm?0:1100);
+
+/* ---------- nav + mobile menu ---------- */
+const nav=$("#nav"),mm=$("#mm"),bur=$("#bur");
+const setMenu=o=>{mm.classList.toggle("open",o);nav.classList.toggle("o",o);bur.setAttribute("aria-expanded",o);bur.setAttribute("aria-label",o?"Close menu":"Open menu");
+ $("#bi").innerHTML=o?'<path d="M6 6l12 12M18 6L6 18"/>':'<path d="M4 7h16M4 12h16M4 17h16"/>'};
+bur.onclick=()=>setMenu(!mm.classList.contains("open"));mm.onclick=e=>{if(e.target.closest("a"))setMenu(false)};
+addEventListener("keydown",e=>{if(e.key==="Escape"&&mm.classList.contains("open")){setMenu(false);bur.focus()}});
+const secs=NAV.map(([i])=>$("#"+i)),lks=$$("#nl a");
+function onScroll(){nav.classList.toggle("s",scrollY>40);let cur="";secs.forEach(s=>{if(s&&scrollY>=s.offsetTop-160)cur=s.id});lks.forEach(a=>a.classList.toggle("on",a.getAttribute("href")=="#"+cur))}
+addEventListener("scroll",onScroll,{passive:true});onScroll();
+
+/* ---------- reveal ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12,rootMargin:"0px 0px -50px 0px"});
+$$(".rv").forEach((el,i)=>{el.style.transitionDelay=(i%3)*90+"ms";io.observe(el)});
+
+/* ---------- hero canvas: white particles, faint red links ---------- */
+const cv=$("#hc"),cx=cv.getContext("2d");let W,H,pts=[],vis=true,running=false;
+function size(){const r=cv.parentElement.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+ const n=Math.max(26,Math.min(80,Math.floor(W*H/26000)));pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.4+.5}));draw(false)}
+function draw(step=true){cx.clearRect(0,0,W,H);
+ for(const p of pts){if(step){p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H}cx.fillStyle="rgba(255,255,255,.55)";cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()}
+ for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<130){cx.strokeStyle=`rgba(255,42,42,${.3*(1-d/130)})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.stroke()}}}
+function loop(){if(!vis||rm){running=false;return}draw();requestAnimationFrame(loop)}
+new IntersectionObserver(([e])=>{vis=e.isIntersecting;if(vis&&!running&&!rm){running=true;loop()}}).observe($("#home"));
+let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(size,150)});size();
+
+/* ---------- process: curved SVG path drawn by scroll, active card follows ---------- */
+const stage=$("#stage"),base=$("#pbase"),fill=$("#pfill"),tags=$$(".tag"),mob=matchMedia("(max-width:899px)");let PL=1;
+function layout(){const w=stage.clientWidth,h=stage.clientHeight;$("#psvg").setAttribute("viewBox",`0 0 ${w} ${h}`);let d;
+ if(mob.matches){d=`M22 0V${h}`}else{d=`M${w/2} 0`;let px=w/2,py=0;tags.forEach(t=>{const x=t.offsetLeft+t.offsetWidth/2,y=t.offsetTop+t.offsetHeight/2;d+=`C${px} ${(py+y)/2} ${x} ${(py+y)/2} ${x} ${y}`;px=x;py=y});d+=`C${px} ${(py+h)/2} ${w/2} ${(py+h)/2} ${w/2} ${h}`}
+ base.setAttribute("d",d);fill.setAttribute("d",d);PL=fill.getTotalLength();fill.style.strokeDasharray=PL;update()}
+function update(){const r=stage.getBoundingClientRect(),vh=innerHeight,pr=Math.max(0,Math.min(1,(vh*.62-r.top)/r.height));fill.style.strokeDashoffset=PL*(1-pr);
+ let act=-1;tags.forEach((t,i)=>{if(t.getBoundingClientRect().top<vh*.6)act=i});tags.forEach((t,i)=>t.classList.toggle("on",i===act))}
+addEventListener("scroll",update,{passive:true});addEventListener("resize",layout);layout();setTimeout(layout,1300);
+
+/* ---------- project dialog ---------- */
+const dlg=$("#dlg"),sec=(h,x)=>x&&x.length?`<h4>${h}</h4>${Array.isArray(x)?`<ul class="l">${x.map(i=>`<li>${i}</li>`).join("")}</ul>`:`<p>${x}</p>`}`:"";
+document.addEventListener("click",e=>{const o=e.target.closest("[data-open]");
+ if(o){const p=PROJECTS.find(x=>x.slug==o.dataset.open);
+  dlg.innerHTML=`<div class="dlg"><button class="x" aria-label="Close" onclick="this.closest('dialog').close()">×</button><h3>${p.title}</h3>${p.image?`<img src="${p.image}" alt="${p.imageAlt||p.title}">`:""}${(p.gallery||[]).map(g=>`<img src="${g}" alt="${p.title} screenshot">`).join("")}
+  ${sec("Overview",p.overview)}${sec("Problem",p.problem)}${sec("Approach",p.approach)}${sec("Tools",p.tools.join(" · "))}${sec("Results documented in the repository",p.results)}
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px">${p.githubUrl?`<a class="pill w" href="${p.githubUrl}" ${ext}>View on GitHub ${arrow}</a>`:""}${p.liveUrl?`<a class="pill r" href="${p.liveUrl}" ${ext}>Live Demo ${arrow}</a>`:""}${p.caseStudyUrl?`<a class="pill" href="${p.caseStudyUrl}" ${ext}>Case Study ${arrow}</a>`:""}</div></div>`;dlg.showModal()}
+ if(e.target===dlg)dlg.close()});
+
+/* ---------- resume: works when the PDF exists, explains clearly when it doesn't ---------- */
+let resumeOK=null;fetch(L.resume,{method:"HEAD"}).then(r=>{resumeOK=r.ok&&!/html/.test(r.headers.get("content-type")||"")}).catch(()=>{resumeOK=false});
+$$("[data-resume]").forEach(a=>{a.href=L.resume;a.onclick=e=>{if(resumeOK===false){e.preventDefault();alert("The resume PDF hasn't been added yet. Place it at resume/zaeem-jamil-resume.pdf.")}}});
+
+/* ---------- contact: safe mailto handoff (no third-party service) ---------- */
+$("#mf").onsubmit=e=>{e.preventDefault();const n=$("#mn").value.trim(),m=$("#me").value.trim(),t=$("#mm2").value.trim(),fs=$("#fs");
+ if(!n||!/^\S+@\S+\.\S+$/.test(m)||!t){fs.textContent="Please fill in your name, a valid email and a message.";return}
+ const href=`mailto:${L.email}?subject=${encodeURIComponent("Portfolio message from "+n)}&body=${encodeURIComponent(t+"\n\n— "+n+" ("+m+")")}`;
+ e.target.dataset.mailto=href;fs.textContent=`Opening your email app… If nothing opens, write to ${L.email} directly.`;location.href=href};
+
+/* ---------- ZJ Assistant ---------- */
+/* ---------- chatbot ---------- */
+const REFUSE="I can only answer questions about Zaeem Jamil, his work, education, skills, projects, and professional background.";
+const NONE="I don't have that information in my portfolio.";
+const allow=/zaeem|jamil|\b(he|his|him|you|your)\b|skill|project|educat|study|degree|universit|punjab|experience|intern|certif|github|linkedin|portfolio|resume|\bcv\b|contact|email|reach|hire|work|learn|focus|statflow|taxi|fnp|python|excel|mysql|machine learning|ml engineer|statistic|n8n|about|background|tools?\b|link|fiverr|gujranwala|urdu|english|language|based|location/i;
+const deny=/\b(write|generate|debug|translate|solve|calculate)\b|who (is|was) (?!zaeem|muhammad)/i;
+const pj=PROJECTS.map(p=>`• ${p.title}: ${p.description}`).join("\n");
+const intents=[
+ [/project|built|portfolio work/i,()=>`Projects on this portfolio:\n${pj}`],
+ [/skill|tool|technolog|python|excel|mysql|know/i,()=>Object.entries(P.skills).map(([k,v])=>`${k}: ${v.join(", ")}`).join("\n")],
+ [/educat|study|degree|universit|punjab/i,()=>`${P.education.degree} at ${P.education.school}, ${P.education.years} (${P.education.note.toLowerCase()}).`],
+ [/experience|intern|job|work(ed)? at/i,()=>P.experience.map(e=>`${e.role} at ${e.org}${e.place?", "+e.place:""} (${e.period}).${e.tools&&e.tools.length?" Tools: "+e.tools.join(", "):""}`).join("\n")],
+ [/fiverr/i,()=>`Fiverr: ${L.fiverr}`],[/language|urdu|english/i,()=>`Languages: ${P.languages.join(", ")}`],[/based|location|city|live in|gujranwala/i,()=>`${P.name} is based in ${P.location}.`],
+ [/github/i,()=>`GitHub: ${L.github}`],[/linkedin/i,()=>`LinkedIn: ${L.linkedin}`],
+ [/resume|\bcv\b/i,()=>"The resume can be downloaded with the Resume button at the top of this page."],
+ [/contact|email|reach|hire/i,()=>`Email: ${L.email}\nLinkedIn: ${L.linkedin}\nGitHub: ${L.github}\nFiverr: ${L.fiverr}`],
+ [/portfolio|link/i,()=>`Fiverr: ${L.fiverr}\nGitHub: ${L.github}`],
+ [/who|about|background|focus|learn/i,()=>`${P.name} (${P.shortName}) is a Data Analyst with a focus on machine learning. He is studying ${P.education.degree} at ${P.education.school} (${P.education.years}, ${P.education.note.toLowerCase()}).\nCurrent focus: ${P.focus.join(", ")}.`],
+];
+/* any project can be asked about by name: matched on the slug's first word or the title's first word (works for projects added later) */
+const about=p=>[p.title,p.overview||p.description,p.problem&&`Question: ${p.problem}`,`Tools: ${p.tools.join(", ")}`,p.githubUrl&&`GitHub: ${p.githubUrl}`,p.liveUrl&&`Live demo: ${p.liveUrl}`].filter(Boolean).join("\n");
+const byName=q=>PROJECTS.find(p=>[p.slug.split("-")[0],p.title.split(/[\s—:-]+/)[0]].some(k=>k.length>2&&q.toLowerCase().includes(k.toLowerCase())));
+const msgs=$("#msgs"),ci=$("#ci");
+const add=(t,c)=>{const d=document.createElement("div");d.className="m "+c;d.textContent=t;msgs.append(d);msgs.scrollTop=msgs.scrollHeight;return d};
+add(`Hi! I can answer questions about ${P.shortName}: his projects, skills, education and contact details.`,"b");
+["Who is Zaeem?","What projects has Zaeem built?","What are Zaeem's skills?","What is StatFlow AI?","Where can I find Zaeem's GitHub?"].forEach(q=>{const b=document.createElement("button");b.type="button";b.textContent=q;b.onclick=()=>ask(q);$("#sug").append(b)});
+async function ask(q){
+ q=q.trim();if(!q)return;add(q,"u");ci.value="";
+ const t=add("","b dots");t.innerHTML='<span></span><span></span><span></span><em class="typing">typing…</em>';
+ const done=x=>{t.className="m b";t.textContent=x;msgs.scrollTop=msgs.scrollHeight};
+ await new Promise(r=>setTimeout(r,450));
+ if(deny.test(q)||!allow.test(q))return done(REFUSE);
+ const pr=byName(q);if(pr)return done(about(pr));
+ const hit=intents.find(([re])=>re.test(q));
+ if(hit)return done(hit[1]());
+ try{const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q})});
+  if(!r.ok)throw 0;const j=await r.json();done(j.reply||NONE)}catch{done(NONE)}
+}
+$("#cf").onsubmit=e=>{e.preventDefault();ask(ci.value)};
+
+const panel=$("#chatPanel"),fabBtn=$("#fab");
+const setChat=o=>{panel.classList.toggle("open",o);fabBtn.setAttribute("aria-expanded",o);if(o)setTimeout(()=>$("#ci").focus({preventScroll:true}),320)};
+fabBtn.onclick=()=>setChat(!panel.classList.contains("open"));
+$("#cx").onclick=()=>{setChat(false);fabBtn.focus()};
+addEventListener("keydown",e=>{if(e.key==="Escape"&&panel.classList.contains("open")){setChat(false);fabBtn.focus()}});
+document.addEventListener("click",e=>{if(panel.classList.contains("open")&&!panel.contains(e.target)&&e.target!==fabBtn&&!fabBtn.contains(e.target))setChat(false)});
+</script>
+</body>
+</html>
