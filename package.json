@@ -1,0 +1,10 @@
+{
+  "name": "zaeem-jamil-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/chat.test.js",
+    "check": "node --check guard.js && node --check answers.js && node --check api/chat.js && node --check data.js"
+  }
+}
